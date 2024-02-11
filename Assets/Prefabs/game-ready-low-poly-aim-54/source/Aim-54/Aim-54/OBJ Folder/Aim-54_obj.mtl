@@ -1,0 +1,16 @@
+# Blender MTL File: 'Aim-54.blend'
+# Material Count: 1
+
+newmtl Aim-54
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.040909 0.040909 0.040909
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 3.500000 C:\\Users\\mahmu\\Desktop\\Nato Missile Pack\\Aim-54\\Yeni klasör\\Aim-54_Aim-54_002_Normal.png
+map_Kd C:\\Users\\mahmu\\Desktop\\Nato Missile Pack\\Aim-54\\Yeni klasör\\Aim-54_Aim-54_002_BaseColor.png
+map_Ns C:\\Users\\mahmu\\Desktop\\Nato Missile Pack\\Aim-54\\Yeni klasör\\Aim-54_Material.001_Roughness.png
+refl C:\\Users\\mahmu\\Desktop\\Nato Missile Pack\\Aim-54\\Yeni klasör\\Aim-54_Aim-54_002_Metallic.png
