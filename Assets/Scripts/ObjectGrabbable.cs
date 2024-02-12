@@ -7,6 +7,8 @@ public class ObjectGrabbable : MonoBehaviour
 {
     private Rigidbody rigidBody;
     private MeshRenderer meshRenderer;
+    private CapsuleCollider capsuleCollider;
+    private BoxCollider boxCollider;
     PlayerScript playerScript;
     AudioSource missleAudio;
 
@@ -24,7 +26,6 @@ public class ObjectGrabbable : MonoBehaviour
 
     private Collision collisionObject;
 
-    [SerializeField] private Transform enemyPosition;
 
 
 
@@ -33,6 +34,17 @@ public class ObjectGrabbable : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
+        
+        if (capsuleCollider == null)
+        {
+            capsuleCollider = GetComponent<CapsuleCollider>();
+        }
+
+        if (boxCollider == null)
+        {
+            boxCollider = GetComponent<BoxCollider>();
+        }
+
         missleAudio = GetComponent<AudioSource>();
 
 
@@ -57,7 +69,16 @@ public class ObjectGrabbable : MonoBehaviour
         this.objectGrabPointTransform = objectGrabPointTransform;
         rigidBody.useGravity = false;
         laser.SetActive(true);
-        
+        if (capsuleCollider != null)
+        {
+            capsuleCollider.enabled = false;
+        }
+
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = false;
+        }
+
     }
 
     public void Drop()
@@ -65,6 +86,15 @@ public class ObjectGrabbable : MonoBehaviour
         this.objectGrabPointTransform = null;
         rigidBody.useGravity = true;
         laser.SetActive(false);
+        if (capsuleCollider != null)
+        {
+            capsuleCollider.enabled = true;
+        }
+
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = true;
+        }
     }
 
     public void Fired()
@@ -79,6 +109,15 @@ public class ObjectGrabbable : MonoBehaviour
         smoke.SetActive(true);
         laser.SetActive(true);
         missleAudio.Play();
+        if (capsuleCollider != null)
+        {
+            capsuleCollider.enabled = true;
+        }
+
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = true;
+        }
 
 
 
@@ -125,15 +164,25 @@ public class ObjectGrabbable : MonoBehaviour
             yield return new WaitForSeconds(0);
             Instantiate(explosion, collisionObject.transform.position, Quaternion.identity);
             Destroy(collisionObject.gameObject);
-            Destroy(gameObject);
+            StartCoroutine(MissileDeSpawn());
             
             playerScript.kills += 1;
         }
- 
+
+    }
+
+    public IEnumerator MissileDeSpawn()
+    {
+        if (capsuleCollider != null)
+        {
+            capsuleCollider.enabled = false;
+        }
+        laser.SetActive(false);
+        flame.SetActive(false);
+        smoke.SetActive(false);
         
-
-
-
+        yield return new WaitForSeconds(2);
+        Destroy(gameObject);
 
     }
 

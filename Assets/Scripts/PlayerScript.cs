@@ -40,4 +40,7 @@ public class PlayerScript : MonoBehaviour
         Time.timeScale = 0;
 
     }
+
+
+   
 }

@@ -48,4 +48,6 @@ public class EnemyScript : MonoBehaviour
             playerScript.explosion.Play();
         }
     }
+
+
 }
